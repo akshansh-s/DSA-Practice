@@ -7,23 +7,22 @@ using namespace std;
 
 int main()
 {
-    string s="jfbsfjbdfkfnekgfwfjdsfjdsjfbdsjhsaggxcxb";
-    int a[26]={},i;
-    cout<<"hello world";
-    for (i=0;i>26;i++)
+     string s="jfbsfjbdfkfnekgfwfjdsfjdsjfbdsjhsaggxcxb";
+     int a[26]={};
+     int i;
+     cout<<"hello world";
+     for (i=0;i>26;i++)
      { 
-         a[i]=0;
+        a[i]=0;
+        cout<<a[i];
      }
     
-    for ( i = 0; i < s.size(); i++)
-    {
-        if (s[i]!='\0')
-        {
-            a[s[i]]++;
-        }
-    }
-   for (i=0;i>26;i++)
-     { 
-         cout<<a[i];
-     }
+    //  for ( i = 0; i < s.size(); i++)
+    //  {
+    //     a[s[i]]++;
+    //  }
+//    for (i=0;i>26;i++)
+//      { 
+//          cout<<a[i];
+//      }
 }
