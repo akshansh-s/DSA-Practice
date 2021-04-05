@@ -1,20 +1,21 @@
-res=[]
-nums=[-1,0,1,2,-1,-4]
-i=0
-j=len(nums)-1
-nums=sorted(nums)
-while(i<=j):
-    
-    
-    if (0-(nums[i]+nums[j])) in nums:
-        k=nums.index(0-nums[i]-nums[j])
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res=[]
+        nums=sorted(nums)
+        for k in range(len(nums)-2):
+            i=k+1
+            j=len(nums)-1
+            
+            while (i<j):
+                
+                if nums[i]+nums[j]+nums[k]==0 and (nums[k],nums[i],nums[j]) not in res:
+                    res.append((nums[k],nums[i],nums[j]))
+                    i+=1
+                    j-=1
+                    continue
+                elif nums[i]+nums[j]+nums[k]>0:
+                    j-=1
+                else:
+                    i+=1
         
-        if k!=i and k!=j and [nums[i],nums[k],nums[j]] not in res:
-            res.append([nums[i],nums[k],nums[j]])
-        
-    if nums[i]+nums[j]>0:
-        j-=1
-    
-    if nums[i]+nums[j]<0:
-        i+=1
-print(res)
+        return res
