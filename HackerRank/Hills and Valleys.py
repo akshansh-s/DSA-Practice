@@ -7,4 +7,3 @@ for i in range(1,n-1):
     elif lst[i]<lst[i+1] and lst[i]<lst[i-1]:
         v+=1
 print(h,v)
-    
