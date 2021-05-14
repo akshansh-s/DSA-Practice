@@ -7,7 +7,7 @@
 #define visited 2
 #define finished 3
 
-int n;    /*Number of vertices in the graph */
+int n;   
 int adj[MAX][MAX];
 void create_graph( );
 

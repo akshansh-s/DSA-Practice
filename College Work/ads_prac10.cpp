@@ -1,30 +1,21 @@
-#include<iostream>
+#include <iostream>
 #include <list>
-#include <limits.h>
+#include <stack>
 using namespace std;
  
-// Class for an undirected graph
-class Graph
-{
-     
-    // No. of vertices
-    int V;  
-   
-    // Pointer to an array
-    // containing adjacency lists
-    list<int> *adj; 
-    bool isCyclicUtil(int v, bool visited[],
-                              int parent);
+class Graph {
+
+    int V;
+    list<int>* adj;
+ 
+    void topologicalSortUtil(int v, bool visited[],
+                             stack<int>& Stack);
+ 
 public:
    
-    // Constructor
-    Graph(int V);  
-   
-    // To add an edge to graph
+    Graph(int V);
     void addEdge(int v, int w);
-   
-    // Returns true if there is a cycle
-    bool isCyclic(); 
+    void prac10();
 };
  
 Graph::Graph(int V)
@@ -35,95 +26,58 @@ Graph::Graph(int V)
  
 void Graph::addEdge(int v, int w)
 {
-     
-    // Add w to v’s list.
-    adj[v].push_back(w);
-   
-    // Add v to w’s list.
-    adj[w].push_back(v);
-}
  
-// A recursive function that
-// uses visited[] and parent to detect
-// cycle in subgraph reachable
-// from vertex v.
-bool Graph::isCyclicUtil(int v,
-                bool visited[], int parent)
+    adj[v].push_back(w);
+}
+
+void Graph::topologicalSortUtil(int v, bool visited[],
+                                stack<int>& Stack)
 {
-     
-    // Mark the current node as visited
+ 
     visited[v] = true;
  
-    // Recur for all the vertices
-    // adjacent to this vertex
     list<int>::iterator i;
-    for (i = adj[v].begin(); i !=
-                       adj[v].end(); ++i)
-    {
-         
-        // If an adjacent vertex is not visited,
-        //then recur for that adjacent
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
         if (!visited[*i])
-        {
-           if (isCyclicUtil(*i, visited, v))
-              return true;
-        }
+            topologicalSortUtil(*i, visited, Stack);
  
-        // If an adjacent vertex is visited and
-        // is not parent of current vertex,
-        // then there exists a cycle in the graph.
-        else if (*i != parent)
-           return true;
-    }
-    return false;
+    Stack.push(v);
 }
  
-// Returns true if the graph contains
-// a cycle, else false.
-bool Graph::isCyclic()
+void Graph::prac10()
 {
-     
-    // Mark all the vertices as not
-    // visited and not part of recursion
-    // stack
-    bool *visited = new bool[V];
+    stack<int> Stack;
+ 
+    bool* visited = new bool[V];
     for (int i = 0; i < V; i++)
         visited[i] = false;
  
-    // Call the recursive helper
-    // function to detect cycle in different
-    // DFS trees
-    for (int u = 0; u < V; u++)
-    {
-       
-        // Don't recur for u if
-        // it is already visited
-        if (!visited[u])
-          if (isCyclicUtil(u, visited, -1))
-             return true;
+    for (int i = 0; i < V; i++)
+        if (visited[i] == false)
+            topologicalSortUtil(i, visited, Stack);
+ 
+    while (Stack.empty() == false) {
+        cout << Stack.top() << " ";
+        Stack.pop();
     }
-    return false;
 }
  
-// Driver program to test above functions
+// Driver Code
 int main()
 {
-    Graph g1(5);
-    g1.addEdge(1, 0);
-    g1.addEdge(0, 2);
-    g1.addEdge(2, 1);
-    g1.addEdge(0, 3);
-    g1.addEdge(3, 4);
-    g1.isCyclic()?
-       cout << "Graph contains cycle\n":
-       cout << "Graph doesn't contain cycle\n";
+    // Create a graph given in the above diagram
+    Graph g(6);
+    g.addEdge(5, 2);
+    g.addEdge(5, 0);
+    g.addEdge(4, 0);
+    g.addEdge(4, 1);
+    g.addEdge(2, 3);
+    g.addEdge(3, 1);
  
-    Graph g2(3);
-    g2.addEdge(0, 1);
-    g2.addEdge(1, 2);
-    g2.isCyclic()?
-       cout << "Graph contains cycle\n":
-       cout << "Graph doesn't contain cycle\n";
+    cout << "Following is the process dependency graph \n";
+ 
+
+    g.prac10();
  
     return 0;
 }
