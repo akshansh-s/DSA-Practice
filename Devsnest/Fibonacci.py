@@ -50,10 +50,16 @@ def solve(n):
 def solve(n):
     # CODE HERE
     zero=0
-    ans=0
+    ans=1
     if n<=1:
         return n
-    for i in range(2:n+1):
-        a,b=b,a+b
-    return b
+    for i in range(2,n+1):
+        zero,ans=ans,zero+ans
+    return ans
     
+
+
+
+    
+
+
