@@ -47,6 +47,7 @@ All the integers in nums are unique, nums is sorted in ascending order.
 Expected Time Complexity: O(log n)
 Expected Space Complexity: O(1)'''
 
+#with extra if else
 def solve(n, nums, target):
     # CODE HERE
     start=0
