@@ -45,3 +45,14 @@ Constraints
 Expected Time Complexity: O(n)
 Expected Space Complexity: O(1)'''
 
+def solve(n, arr, x, y):
+    # CODE HERE
+    diff=y-x+1
+    #print(diff)
+    sum=0
+    #ans=0.00
+    for i in range(x,y+1):
+        sum=sum+arr[i]
+        #print(sum)
+    
+    return sum/diff
